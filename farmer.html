@@ -18,6 +18,8 @@
             text-align: center;
         }
         section {
+         
+        
             padding: 2rem;
             text-align: center;
         }
@@ -37,6 +39,8 @@
         }
         .graph {
             margin: 2rem auto;
+            max-width: fit-content;
+         
             width: 80%;
         }
         .bidding {
@@ -51,9 +55,9 @@
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['January', 'February', 'March', 'April', 'May'],
+                    labels: ['Wheat', 'Rice', 'Cotton', '', 'May'],
                     datasets: [{
-                        label: 'Crop Value Trend',
+                        label: 'Current Market price',
                         data: [100, 120, 95, 130, 150],
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 2,
@@ -74,7 +78,9 @@
                 }
             });
         }
-
+         function AddName(){
+            window.location.href="add_name.html";
+         }
         function goToAddCropPage() {
             window.location.href = "add_crop.html"; // Redirect to Add Crop page
         }
@@ -95,11 +101,13 @@
     <section>
         <h2>Welcome, Farmer!</h2>
         <p>Manage your crops, participate in bidding, and monitor market trends.</p>
+        <button onclick="AddName()">Your Profile</button>
         <button onclick="goToAddCropPage()">Add Crop</button>
         <button onclick="viewOrders()">View Orders</button>
-        <button onclick="startBidding()">Start Bidding</button>
+        <button onclick="startBidding()">Start Bidding</button>   </section>
+        <section>
         <div class="graph">
-            <canvas id="cropChart"></canvas>
+            <canvas id="cropChart" width="500vw"></canvas>
         </div>
         <div class="bidding">
             <h3>Bidding System</h3>
