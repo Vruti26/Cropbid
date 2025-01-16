@@ -54,11 +54,36 @@
             transition: background-color 0.3s, transform 0.3s;
             margin-top: 1rem;
         }
+        label {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        form {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+        input, textarea, select {
+            margin-top: 0.5rem;
+            width:6rem;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
         button:hover {
             background-color: #45a049;
             transform: scale(1.1);
         }
+        #img{
+            width:50%;
+        }
     </style>
+    <script>
+        function Info(){
+            alert("This feature comming soon");
+            // window.location.href= 'info_crop.html';
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -66,16 +91,30 @@
     </header>
     <section>
         <div class="product-list">
+            
             <div class="product-item">
-                <img src="tomato.jpg" alt="Tomato">
+                <img src="tomato.jpg" id="img" alt="Tomato">
                 <h3>Fresh Tomatoes</h3>
                 <p>₹30/kg</p>
+                <button onclick='Info()'>More about Product</button>
+             <form>  
+            
+            <input id="Quantity" placeholder="Quantity" rows="1" cols="1"></input>
+</form>
                 <button onclick="alert('Added to Cart')">Add to Cart</button>
             </div>
+
+
             <div class="product-item">
-                <img src="potato.jpg" alt="Potato">
+                <br>
+                <img src="potato.jpg" id="img" alt="Potato">
                 <h3>Organic Potatoes</h3>
                 <p>₹20/kg</p>
+                <button onclick='Info()'>More about Product</button>
+                <form>  
+            
+                    <input id="Quantity" placeholder="Quantity" rows="1" cols="1"></input>
+        </form>
                 <button onclick="alert('Added to Cart')">Add to Cart</button>
             </div>
             <!-- Add more products here -->
