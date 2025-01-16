@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Crop</title>
+    <title>Crop</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -63,43 +63,64 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        let barChart;
+
+        // Function to add a new crop
         function addCrop() {
-            alert('Crop Added Successfully!');
-            showGraph();
+            alert('Crop added successfully!');
+            updateChart();
         }
 
-        function showGraph() {
-            document.querySelector('.graph').style.display = 'block';
-            const ctx = document.getElementById('priceChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Tomato', 'Potato', 'Wheat', 'Rice'],
-                    datasets: [{
-                        label: 'Price per kg (₹)',
-                        data: [30, 20, 25, 40],
-                        backgroundColor: ['#4CAF50', '#45a049', '#43A047', '#66BB6A']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        tooltip: {
-                            enabled: true,
-                        },
+        // Function to display and update the chart
+        function updateChart() {
+            const cropName = document.getElementById('cropName').value.trim();
+            const cropPrice = parseFloat(document.getElementById('cropPrice').value.trim());
+
+            if (!cropName || isNaN(cropPrice)) {
+                alert("Please provide valid inputs for the crop name and price.");
+                return;
+            }
+
+            const ctx = document.getElementById('chartCanvas').getContext('2d');
+            const graphContainer = document.querySelector('.graph');
+
+            if (!barChart) {
+                // Initialize the chart if it doesn't exist
+                barChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [cropName],
+                        datasets: [{
+                            label: 'Price per kg (₹)',
+                            data: [cropPrice],
+                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
                     },
-                }
-            });
+                    options: {
+                       
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            } else {
+                // Update the existing chart
+                barChart.data.labels.push(cropName);
+                barChart.data.datasets[0].data.push(cropPrice);
+                barChart.update();
+            }
+
+            graphContainer.style.display = 'block';
         }
     </script>
 </head>
 <body>
     <header>
-        <h1>Add Crop</h1>
+        <h1>Crop</h1>
     </header>
     <section>
         <form onsubmit="event.preventDefault(); addCrop();">
@@ -118,7 +139,7 @@
             <button type="submit">Add Crop</button>
         </form>
         <div class="graph">
-            <canvas id="priceChart"></canvas>
+            <canvas id="chartCanvas" width="500"></canvas>
         </div>
     </section>
 </body>
